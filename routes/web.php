@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/post/{id}', 'HomeController@show')->name('post.show');
 Route::get('/create/post', 'HomeController@create')->name('post.create');
 Route::post('/add/post', 'HomeController@store')->name('post.store');
@@ -22,6 +22,6 @@ Route::put('/update/post/{slug}', 'HomeController@update')->name('post.update');
 Route::delete('/delete/post/{slug}', 'HomeController@delete')->name('post.delete');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
-Route::get('/dashboard', function () {return view('dashboard'); })->name('dashboard');
+Route::get('/dashboard', function () {return redirect('/'); });
 
 });

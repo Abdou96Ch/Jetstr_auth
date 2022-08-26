@@ -10,8 +10,20 @@
           <a class="nav-link active" aria-current="page" href="/">Acceuil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href= {{route('post.create')}} >Ajouter</a>
+          <a class="nav-link" href= "/create/post" >Ajouter</a>
         </li>
+        @if(auth()->check())
+        <li class="nav-item">
+        <a class="nav-link" href= {{ route('profile.show') }} >{{auth()->user()->name}}</a>
+        </li>  
+        @else
+        <li class="nav-item">
+          <a class="nav-link" href= {{ url('/register') }} >Inscription</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" href= {{ url('/login') }} >Login</a>
+        </li> 
+        @endif
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown

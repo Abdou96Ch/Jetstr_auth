@@ -27,8 +27,8 @@
                     </form>
                         <!-- boutton supprimer avec Pop-up de confirmation de suppression de post -->
                         <button onclick="event.preventDefault();
-                        // if(confirm('voulez-vous supprimer ce post'))
-                        // document.getElementById( {{$post->id}}).submit();"                    
+                        if(confirm('voulez-vous supprimer ce post'))
+                        document.getElementById( {{$post->id}}).submit();"                    
                         class ="btn btn-danger" type="submit" >Supprimer</button>
                     </div>
                 </div>
