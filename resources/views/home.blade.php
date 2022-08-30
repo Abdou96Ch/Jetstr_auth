@@ -20,6 +20,7 @@ Acceuil
                 <img src="{{ asset('./uploads/'.$post->image) }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title}}</h5>
+                        <h5 class="card-title">{{ $post->user_id ? $post->user->name : null  }}</h5>
                         <p class="card-text">{{ Str::limit($post->body,50) }}</p>
                         <a href= " /post/{{$post->slug}}" class="btn btn-primary">voir</a>
                     </div>

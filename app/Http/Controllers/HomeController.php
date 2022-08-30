@@ -58,6 +58,7 @@ class HomeController extends Controller
         'slug' => Str::slug($request->title),
         'body' => $request->body,
         'image' => $image_name,
+        'user_id' => auth()->user()->id
     ]);
     echo("Post ajouté");
     return redirect('/')->with(['success'=>'Le post est ajouté avec succès']);
