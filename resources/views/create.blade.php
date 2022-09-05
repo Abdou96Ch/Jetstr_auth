@@ -29,7 +29,7 @@ Publier
                 </div>
                 <div class="card-body">
                      
-                    <form action="/add/post" method="post" enctype="multipart/form-data">
+                    <form action="{{('post.store')}}" method="post" enctype="multipart/form-data">
                         <!-- Ajout de CSRF token pour connexion sécurisée -->
                         @csrf
                         

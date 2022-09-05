@@ -16,11 +16,12 @@
                         <p class="card-text">{{ $post->body}}</p>
                         </div>
 
-                    @if(auth()->user()->id == $post->user_id)
+                    @if(auth()->check())
+                    @if(auth()->user()->id == $post->user_id || auth()->user()->is_admin)
                     <!-- Bouton pour modifier le post -->
                     <a href="{{ route('post.edit', $post->slug)}}" class="btn btn-warning  mb-2">Modifier</a>
                         <!-- On ajoute un formulaire pour la suppression pour y confirmer -->
-                        <form id = "{{ $post->id }}" action="{{ route('post.delete', $post->slug)}}" method="post">
+                        <form id = "{{ $post->id }}" action="{{ route('post.destroy', $post->slug)}}" method="post">
                             <!-- Au niveau de chaque formulaire on ajoute le csrf -->
                             @csrf
                             <!-- La methode delete pour la supression à travers le formulaire -->
@@ -32,6 +33,7 @@
                         document.getElementById( {{$post->id}}).submit();"                    
                         class ="btn btn-danger" type="submit" >Supprimer</button>
                     @endif    
+                    @endif
                 </div>
             </div>
         </div>

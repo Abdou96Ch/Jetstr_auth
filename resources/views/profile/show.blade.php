@@ -25,25 +25,42 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(auth()->user()->posts as $post)
+                                    @foreach(auth()->user()->posts()->withTrashed()->get() as $post)
                                     <tr>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">{{$post->title}}</td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">{{$post->body}}</td>
                                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                                         <!-- Bouton pour modifier le post -->
+                                            <!-- Bouton pour modifier le post -->
                                             <a href="{{ route('post.edit', $post->slug)}}" class="border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline">Modifier</a>
-                                                <!-- On ajoute un formulaire pour la suppression pour y confirmer -->
-                                                <form id = "{{ $post->id }}" action="{{ route('post.delete', $post->slug)}}" method="post">
-                                                    <!-- Au niveau de chaque formulaire on ajoute le csrf -->
-                                                    @csrf
-                                                    <!-- La methode delete pour la supression à travers le formulaire -->
-                                                    @method('DELETE')
-                                                </form>
+                                                <!-- On affiche pour les posts supprimer un bouton de recuperation et de forcer la supression ou le soft delete dans les posts de l'utilisateur-->
+                                                @if($post->trashed())
+                                                    <a href="{{ route('post.restore', $post->slug)}}" class="border border-teal-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline">Restore</a>
+                                                    <form id = "{{ $post->id }}" action="{{ route('post.delete', $post->slug)}}" method="post">
+                                                        <!-- Au niveau de chaque formulaire on ajoute le csrf -->
+                                                        @csrf
+                                                        <!-- La methode delete pour la supression à travers le formulaire -->
+                                                        @method('DELETE')
+                                                    </form>
+                                                @else
+                                                    <form id = "{{ $post->id }}" action="{{ route('post.destroy', $post->slug)}}" method="post">
+                                                        <!-- Au niveau de chaque formulaire on ajoute le csrf -->
+                                                        @csrf
+                                                        <!-- La methode delete pour la supression à travers le formulaire -->
+                                                        @method('DELETE')
+                                                    </form>
+                                                @endif
+                                                
                                                 <!-- boutton supprimer avec Pop-up de confirmation de suppression de post -->
                                                 <button onclick="event.preventDefault();
                                                 if(confirm('voulez-vous supprimer ce post'))
                                                 document.getElementById( {{$post->id}}).submit();"                    
-                                                class ="border border-yellow-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline" type="submit" >Supprimer</button></td>
+                                                class ="border border-yellow-500 bg-red-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline" type="submit" >
+                                                @if ($post->trashed())
+                                                    fce supr
+                                                @else
+                                                    Supprimer
+                                                @endif
+                                                </button></td>
                                     </tr>  
                                     @endforeach                  
                                 </tbody>

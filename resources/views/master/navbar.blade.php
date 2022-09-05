@@ -11,28 +11,28 @@
         </li>
         @if(auth()->check())
           <li class="nav-item">
-            <a class="nav-link" href= {{ route('profile.show') }} >{{auth()->user()->name}}</a>
+            <a class="nav-link" href= "{{ route('profile.show') }}" >{{auth()->user()->name}}</a>
           </li>  
           <li class="nav-item">
-            <a class="nav-link" href= "/create/post" >Ajouter</a>
+            <a class="nav-link" href= "{{ route('post.create')}}" >Ajouter</a>
           </li>
         @else
           <li class="nav-item">
-            <a class="nav-link" href= {{ url('/register') }} >Inscription</a>
+            <a class="nav-link" href= "{{ url('/register') }}" >Inscription</a>
           </li>  
           <li class="nav-item">
-            <a class="nav-link" href= {{ url('/login') }} >Login</a>
+            <a class="nav-link" href= "{{ url('/login') }}" >Login</a>
           </li> 
         @endif
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Autres
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#"></a></li>
+            <li><a class="dropdown-item" href="#">Paramètres</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
           </ul>
         </li>
       </ul>
